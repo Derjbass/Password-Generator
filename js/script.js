@@ -5,6 +5,7 @@ var passwordLower;
 var passwordUpper;
 var passwordNumber;
 var passwordSpecial;
+var closeWindow;
 
 let alphabetLower = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 let alphabetUpper = ["A", "B", "C", "D", "E", "F", "G", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
@@ -26,17 +27,18 @@ function writePassword() {
 generateBtn.addEventListener("click", writePassword);
 
 function generatePassword() {
-  passwordLength = parseInt(prompt('How long should the password be?  (between 8 and 128 characters)'));
+  passwordLength = prompt('How long should the password be?  (between 8 and 128 characters)');
   console.log(passwordLength);
   console.log(typeof passwordLength);
+  console.log('first prompt finished')
 
   //checks if cancel is selected and ends function on confirmation
-  if(!passwordLength){
-    var close = confirm('Select OK to stop password generation');
+  if(passwordLength == null){
+    closeWindow = confirm('Select OK to stop password generation');
     console.log(typeof close);
     console.log(close);
-    if(close){
-      return;
+    if(closeWindow){
+      return 'Password generation cancelled';
     }
     else {
       generatePassword();
@@ -47,17 +49,48 @@ function generatePassword() {
 
   //Checks if input is a number
   while (isNaN(parseInt(passwordLength))){
-      passwordLength = parseInt(prompt('This input requires a number between 8 and 128'));
-  }
+      passwordLength = prompt('This input requires a number between 8 and 128');
+
+      //check to see if cancel is selected
+      if(passwordLength == null){
+        closeWindow = confirm('Select OK to stop password generation');
+        console.log(typeof close);
+        console.log(close);
+        if(closeWindow){
+          return 'Password generation cancelled';
+        }
+        else {
+          continue;
+        }
+      }
+
+      console.log(typeof passwordLength);
+    }
   console.log(passwordLength);
   console.log(typeof parseInt(passwordLength));
   console.log(typeof passwordLength);
   console.log(parseInt(passwordLength));
+  console.log('first while finished')
   
 
   //checks to see that the input is between 8 and 128
   while (passwordLength < 8 || passwordLength > 128){
     passwordLength = prompt('Number must be between 8 and 128');
+    
+    //check to see if cancel is selected
+    if(passwordLength == null){
+      closeWindow = confirm('Select OK to stop password generation');
+      console.log(typeof close);
+      console.log(close);
+      if(closeWindow){
+        return 'Password generation cancelled';
+      }
+      else {
+        continue;
+      }
+
+      console.log('second while finished')
+    }
   }
 
   //if input is between 8 and 128 moves to what is required for the password
