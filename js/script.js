@@ -28,9 +28,7 @@ generateBtn.addEventListener("click", writePassword);
 
 function generatePassword() {
   passwordLength = prompt('How long should the password be?  (between 8 and 128 characters)');
-  console.log(passwordLength);
-  console.log(typeof passwordLength);
-  console.log('first prompt finished')
+  
 
   //checks if cancel is selected and ends function on confirmation
   if(passwordLength == null){
@@ -54,23 +52,16 @@ function generatePassword() {
       //check to see if cancel is selected
       if(passwordLength == null){
         closeWindow = confirm('Select OK to stop password generation');
-        console.log(typeof close);
-        console.log(close);
+       
         if(closeWindow){
           return 'Password generation cancelled';
         }
         else {
           continue;
         }
-      }
-
-      console.log(typeof passwordLength);
+      } 
     }
-  console.log(passwordLength);
-  console.log(typeof parseInt(passwordLength));
-  console.log(typeof passwordLength);
-  console.log(parseInt(passwordLength));
-  console.log('first while finished')
+  
   
 
   //checks to see that the input is between 8 and 128
@@ -80,8 +71,7 @@ function generatePassword() {
     //check to see if cancel is selected
     if(passwordLength == null){
       closeWindow = confirm('Select OK to stop password generation');
-      console.log(typeof close);
-      console.log(close);
+  
       if(closeWindow){
         return 'Password generation cancelled';
       }
@@ -89,7 +79,6 @@ function generatePassword() {
         continue;
       }
 
-      console.log('second while finished')
     }
   }
 
@@ -108,17 +97,12 @@ function generatePassword() {
       passwordSpecial = confirm('Does the password need special characters?');
     }
 
-    //check to confirm results
-    console.log(passwordLower, passwordUpper, passwordNumber, passwordSpecial)
 }
 
   //all 4 selected
   if (passwordLower && passwordUpper && passwordNumber && passwordSpecial){
     selections = alphabetLower + ',' + alphabetUpper + ',' + num + ',' + specialChar;
 
-    console.log(selections);
-    console.log(typeof selections);
-    console.log(typeof passwordLower);
   }
   //3 selections
   else if (passwordLower && passwordUpper && passwordNumber){
@@ -155,23 +139,25 @@ function generatePassword() {
   //single selections
   else if (passwordLower){
     selections = alphabetLower
+    selections = selections.toString();
   }
   else if (passwordUpper){
     selections = alphabetUpper;
+    selections = selections.toString();
   }
   else if (passwordNumber){
     selections = num;
+    selections = selections.toString();
   }
   else if (passwordSpecial){
     selections = specialChar;
+    selections = selections.toString();
   }
+
+  
 
   //converts selection string to array for password generation
   selections = selections.split(',');
-  console.log(selections);
-  console.log(selections[9]);
-  console.log(typeof selections);
-  console.log(selections.length);
 
   //create password array to push characters for random password
   var pw = [];
@@ -181,9 +167,9 @@ function generatePassword() {
     var pwSelections = selections[Math.floor(Math.random() * selections.length)];
     pw.push(pwSelections);
   }
-  console.log(pw);
   //convert array to string
   passwordGen = pw.join('');
-  console.log(passwordGen);
+
+  //return generated password
   return passwordGen;
 }
